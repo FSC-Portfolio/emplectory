@@ -2,45 +2,56 @@ import React, { Component } from "react";
 import EmployeeRow from "./components/EmployeeRow";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
-import friends from "./friends.json";
+import Search from "./components/Search";
+// import friends from "./friends.json";
 import API from "./API";
 
 class App extends Component {
-  // Setting this.state.friends to the friends json array
+  // Setting the state to the employees array.
   state = {
-    // friends,
-    employees: []
+    employees: [],
+    filteredEmployees: [],
+    search: ""
   };
-
-  // state = {
-  //   result: {},
-  //   search: ""
-  // };
 
   // When this component mounts, load some employees.
   componentDidMount() {
     this.searchEmployees();
   }
 
-  searchEmployees = (useSeed = false) => {
+  handleInputChange = (event) => {
+    this.setState({ search: event.target.value }, () => {
+      console.log(this.state.employees);
+      // Use a callback function to let the state set before using it.
+      this.setState(
+        {filteredEmployees: this.state.employees.filter(
+          item =>
+            item.name.first.toLowerCase().includes(this.state.search)
+            || item.login.username.toLowerCase().includes(this.state.search)
+            || item.login.password.toLowerCase().includes(this.state.search)
+          )
+        }
+      );
+      console.log(this.state.search);
+    });
+  }
+
+  searchEmployees = (useSeed = true) => {
     API.search(useSeed)
       .then(res => this.setState({employees: res.data.results}))
-      // .then(res => this.setState({result: res}))
+      .then(() => this.setState({filteredEmployees: this.state.employees}))
       .catch(err => console.log(err));
   };
 
-  // removeFriend = id => {
-  //   // Filter this.state.friends for friends with an id not equal to the id being removed
-  //   const friends = this.state.friends.filter(friend => friend.id !== id);
-  //   // Set this.state.friends equal to the new friends array
-  //   this.setState({ friends });
-  // };
-
-  // Map over the employees in the stat and render them.
+  // Map over the employees in the state and render them.
   render() {
     return (
       <Wrapper>
-        <Title>Employee List</Title>
+        <Title>Employee Directory</Title>
+        <div className={"col-md-12"}>
+          <Search handleInputChange={this.handleInputChange} />
+
+        </div>
         <div className={"col-md-12"}>
           <table className={"table table-striped"}>
             <thead>
@@ -52,7 +63,7 @@ class App extends Component {
             </tr>
             </thead>
             <tbody>
-            {this.state.employees.map(employee => (
+            {this.state.filteredEmployees.map(employee => (
               <EmployeeRow
                 removeFriend={this.removeFriend}
                 id={employee.id.value}
@@ -67,7 +78,6 @@ class App extends Component {
 
           </table>
         </div>
-        {/*{console.log(this.state.employees)}*/}
       </Wrapper>
     );
   }
