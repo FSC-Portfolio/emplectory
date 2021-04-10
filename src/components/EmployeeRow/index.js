@@ -14,7 +14,7 @@ function EmployeeRow(props) {
       <td>{props.employee.location.country}</td>
       <td>{props.employee.location.postcode}</td>
       <td>{props.employee.email}</td>
-      <td>{props.employee.cell}</td>
+      {/*<td>{props.employee.cell}</td>*/}
     </tr>
   );
 }
