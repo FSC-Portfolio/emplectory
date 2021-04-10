@@ -6,3 +6,9 @@
   color: #2A77AE;
   margin-bottom: 50px;
 }
+
+.fas, fas:hover {
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    cursor: pointer;
+}

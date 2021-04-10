@@ -4,6 +4,7 @@ import Title from "./components/Title";
 import Search from "./components/Search";
 import EmployeeTable from "./components/EmployeeTable";
 import API from "./API";
+import ThWithSort from "./components/ThWithSort";
 
 class App extends Component {
   // Setting the state to the employees array.
@@ -27,8 +28,15 @@ class App extends Component {
         {filteredEmployees: this.state.employees.filter(
           item =>
             item.name.first.toLowerCase().includes(this.state.search)
-            || item.login.username.toLowerCase().includes(this.state.search)
+            || item.name.title.toLowerCase().includes(this.state.search)
+            || item.name.last.toLowerCase().includes(this.state.search)
             || item.login.password.toLowerCase().includes(this.state.search)
+            || item.dob.age.toString().includes(this.state.search)
+            || item.location.city.toLowerCase().includes(this.state.search)
+            || item.location.country.toLowerCase().includes(this.state.search)
+            || item.location.postcode.toString().toLowerCase().includes(this.state.search)
+            || item.email.toLowerCase().includes(this.state.search)
+            || item.cell.toLowerCase().includes(this.state.search)
           )
         }
       );
@@ -45,12 +53,16 @@ class App extends Component {
 
       // Allow for some nested elements.
       if (!subIndexToSort) {
-        itemA = a[indexToSort].toLowerCase();
-        itemB = b[indexToSort].toLowerCase();
+        itemA = a[indexToSort]; //.toLowerCase();
+        itemB = b[indexToSort]; //.toLowerCase();
       } else {
-        itemA = a[indexToSort][subIndexToSort].toLowerCase();
-        itemB = b[indexToSort][subIndexToSort].toLowerCase();
+
+        itemA = a[indexToSort][subIndexToSort] // .toLowerCase();
+        itemB = b[indexToSort][subIndexToSort] // .toLowerCase();
       }
+
+      if (typeof itemA === "string") itemA = itemA.toLowerCase();
+      if (typeof itemB === "string") itemB = itemB.toLowerCase();
 
       // Allow for ascending / descending
         if (ascDesc) {

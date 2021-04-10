@@ -2,12 +2,27 @@ import React from "react";
 import "./style.css";
 
 function ThWithSort(props) {
-  const handleSort = props.handleSort;
+  const ind = props.ind;
+  // const subInd = null;
+  const subInd = props.subInd ? props.subInd : null;
   return (
     <th scope="col">
-      {props.name}
-      &nbsp;<i onClick={() => handleSort(props.sort[0], props.sort[1])} className="fas fa-sort-up fa-lg"></i>
-      &nbsp;<i onClick={() => handleSort(props.sort[0], props.sort[1], 0)} className="fas fa-sort-down fa-lg"></i>
+      {props.thName}
+      <i onClick={() => props.handleSort(ind, subInd)} className="fas fa-sort-up fa-2x"></i>
+      <i onClick={() => props.handleSort(ind, subInd, null)} className="fas fa-sort-down fa-2x"></i>
+      {/*<div className={"row"}>*/}
+      {/*  <div className={"col-md-8"}>*/}
+      {/*    {props.thName}*/}
+      {/*  </div>*/}
+      {/*  <div className={"col-md-4"}>*/}
+      {/*    <div className={"sort-asc"}>*/}
+      {/*      <i onClick={() => handleSort(ind, subInd)} className="fas fa-sort-up fa-2x"></i>*/}
+      {/*    </div>*/}
+      {/*    <div className={"sort-des"}>*/}
+      {/*      <i onClick={() => handleSort(ind, subInd, null)} className="fas fa-sort-down fa-2x"></i>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </th>
   )
 }
