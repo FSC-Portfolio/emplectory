@@ -1,6 +1,6 @@
 import axios from "axios";
 // Set the number of results returned.
-const RESULTS_NUM = 5;
+const RESULTS_NUM = 500;
 // Localise the results so the formats look familiar.
 const NATIONALITY = "au";
 // Use a seed so the results are the same (then we can filter "our" employees)

@@ -4,7 +4,6 @@ import Title from "./components/Title";
 import Search from "./components/Search";
 import EmployeeTable from "./components/EmployeeTable";
 import API from "./API";
-import ThWithSort from "./components/ThWithSort";
 
 class App extends Component {
   // Setting the state to the employees array.
@@ -22,25 +21,55 @@ class App extends Component {
   handleInputChange = (event) => {
     // On input search for matching details in database.
     this.setState({ search: event.target.value.toLowerCase() }, () => {
-      console.log(this.state.employees);
       // Use a callback function to let the state set before using it.
       this.setState(
         {filteredEmployees: this.state.employees.filter(
-          item =>
-            item.name.first.toLowerCase().includes(this.state.search)
-            || item.name.title.toLowerCase().includes(this.state.search)
-            || item.name.last.toLowerCase().includes(this.state.search)
-            || item.login.password.toLowerCase().includes(this.state.search)
-            || item.dob.age.toString().includes(this.state.search)
-            || item.location.city.toLowerCase().includes(this.state.search)
-            || item.location.country.toLowerCase().includes(this.state.search)
-            || item.location.postcode.toString().toLowerCase().includes(this.state.search)
-            || item.email.toLowerCase().includes(this.state.search)
-            || item.cell.toLowerCase().includes(this.state.search)
+          item => {
+            let filterSearch;
+            switch (event.target.name) {
+              case "search-nameFirst":
+                filterSearch = item.name.first.toLowerCase().includes(this.state.search);
+                break;
+              case "search-nameLast":
+                filterSearch = item.name.last.toLowerCase().includes(this.state.search);
+                break;
+              case "search-dobAge":
+                filterSearch = item.dob.age.toString().includes(this.state.search);
+                break;
+              case "search-locationCity":
+                filterSearch = item.location.city.toLowerCase().includes(this.state.search);
+                break;
+              case "search-locationCountry":
+                filterSearch = item.location.country.toLowerCase().includes(this.state.search);
+                break;
+              case "search-locationPostcode":
+                filterSearch = item.location.postcode.toString().includes(this.state.search);
+                break;
+              case "search-email":
+                filterSearch = item.email.toLowerCase().includes(this.state.search);
+                break;
+              case "search-cell":
+                filterSearch = item.cell.toLowerCase().includes(this.state.search);
+                break;
+
+              default:
+                filterSearch = (
+                  // gotta search em all!
+                  item.name.first.toLowerCase().includes(this.state.search)
+                  || item.name.last.toLowerCase().includes(this.state.search)
+                  || item.login.password.toLowerCase().includes(this.state.search)
+                  || item.dob.age.toString().includes(this.state.search)
+                  || item.location.city.toLowerCase().includes(this.state.search)
+                  || item.location.country.toLowerCase().includes(this.state.search)
+                  || item.location.postcode.toString().toLowerCase().includes(this.state.search)
+                  || item.email.toLowerCase().includes(this.state.search)
+                )
+            }
+            return filterSearch;
+          }
           )
         }
       );
-      console.log(this.state.search);
     });
   }
 
@@ -93,14 +122,18 @@ class App extends Component {
     return (
       <Wrapper>
         <Title>Employee Directory</Title>
-        <div className={"col-md-12"}>
-          <Search handleInputChange={this.handleInputChange} />
+        <div className={"row"}>
+          <div className={"col-md-12"}>
+            <Search handleInputChange={this.handleInputChange} myFilter={"everything"} placeHolder={"Dagnammit search everything!"}/>
+          </div>
 
         </div>
+
         <div className={"col-md-12"}>
           <EmployeeTable
             employees={this.state.filteredEmployees}
             handleSort={this.handleSort}
+            handleInputChange={this.handleInputChange}
           />
         </div>
       </Wrapper>
