@@ -2,15 +2,13 @@ import React from "react";
 import "./style.css";
 
 function EmployeeRow(props) {
+  const employee = props.employee;
   return (
     <tr>
-      <td><img alt={props.name} src={props.image} /></td>
-      <td>{props.name}</td>
-      <td>{props.occupation}</td>
-      <td>{props.location}</td>
-      {/*<span onClick={() => props.removeFriend(props.id)} className="remove">*/}
-      {/*  𝘅*/}
-      {/*</span>*/}
+      <td><img alt={employee.picture.medium} src={employee.picture.medium} title={employee.name.last + ", " + employee.name.first}/></td>
+      <td>{employee.name.first}</td>
+      <td>{employee.login.username}</td>
+      <td>{employee.login.password}</td>
     </tr>
   );
 }
