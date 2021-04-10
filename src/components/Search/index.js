@@ -14,7 +14,6 @@ function Search(props) {
           type="text"
           className="form-control"
           placeholder="Begin typing to filter..."
-          // id="employee-search"
         />
       </div>
     </form>

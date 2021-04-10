@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import EmployeeRow from "./components/EmployeeRow";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import Search from "./components/Search";
-// import friends from "./friends.json";
+import EmployeeTable from "./components/EmployeeTable";
 import API from "./API";
 
 class App extends Component {
@@ -21,7 +20,7 @@ class App extends Component {
 
   handleInputChange = (event) => {
     // On input search for matching details in database.
-    this.setState({ search: event.target.value }, () => {
+    this.setState({ search: event.target.value.toLowerCase() }, () => {
       console.log(this.state.employees);
       // Use a callback function to let the state set before using it.
       this.setState(
@@ -78,7 +77,6 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  // Map over the employees in the state and render them.
   render() {
     return (
       <Wrapper>
@@ -88,39 +86,10 @@ class App extends Component {
 
         </div>
         <div className={"col-md-12"}>
-          <table className={"table table-striped"}>
-            <thead>
-            <tr>
-              <th scope="col">Image</th>
-              <th scope="col">Name
-                &nbsp;<i onClick={() => this.handleSort("name", "first")} className="fas fa-sort-up fa-lg"></i>
-                &nbsp;<i onClick={() => this.handleSort("name", "first", 0)} className="fas fa-sort-down fa-lg"></i>
-              </th>
-              <th scope="col">Username
-                &nbsp;<i onClick={() => this.handleSort("login", "username")} className="fas fa-sort-up fa-lg"></i>
-                &nbsp;<i onClick={() => this.handleSort("login", "username", 0)} className="fas fa-sort-down fa-lg"></i>
-              </th>
-              <th scope="col">Password
-                &nbsp;<i onClick={() => this.handleSort("login", "password")} className="fas fa-sort-up fa-lg"></i>
-                &nbsp;<i onClick={() => this.handleSort("login", "password", 0)} className="fas fa-sort-down fa-lg"></i>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.filteredEmployees.map(employee => (
-              <EmployeeRow
-                removeFriend={this.removeFriend}
-                id={employee.id.value}
-                key={employee.id.value}
-                name={employee.name.first}
-                image={employee.picture.thumbnail}
-                occupation={employee.login.username}
-                location={employee.login.password}
-              />
-            ))}
-            </tbody>
-
-          </table>
+          <EmployeeTable
+            employees={this.state.filteredEmployees}
+            handleSort={this.handleSort}
+          />
         </div>
       </Wrapper>
     );
