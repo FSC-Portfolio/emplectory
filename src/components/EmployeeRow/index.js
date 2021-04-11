@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 function EmployeeRow(props) {
-  // const employee = props.employee;
+  // The employee template.
   return (
     <tr>
       <td><img alt={props.employee.picture.medium} src={props.employee.picture.medium} title={props.employee.name.last + ", " + props.employee.name.first}/></td>
@@ -14,7 +14,6 @@ function EmployeeRow(props) {
       <td>{props.employee.location.country}</td>
       <td>{props.employee.location.postcode}</td>
       <td>{props.employee.email}</td>
-      {/*<td>{props.employee.cell}</td>*/}
     </tr>
   );
 }

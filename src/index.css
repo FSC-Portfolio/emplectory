@@ -4,11 +4,7 @@
 }
 
 html, body, #root {
-  padding: 0;
-  margin: 0;
+  padding: 5px;
+  margin: 5px;
   height: 100%;
-}
-
-.sort-span:hover {
-    color: #d50000;
 }

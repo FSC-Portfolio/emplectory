@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# Progress Web App - Budget Tracker
+# Employee Directory
 ## Table of Contents
 > - [Description](#Description)
 > - [Table of Contents](#Table-of-Contents)
@@ -18,17 +18,17 @@ User can
 - filter all fields
 - sort by any field
 
-Currently cannot filter by more than one field at a time.
+Currently the user cannot filter by more than one field at a time.
 
 * [View the deployed app on Heroku](https://floating-cliffs-70230.herokuapp.com/)
 * [View it on GitHub](https://github.com/FSC-Portfolio/pwa-budget-tracker)
 
-![screenshot](./public/screenshot.png)
+![screenshot](./public/screencast.gif)
 
 ## Installation
-Clone the repo, navigate to the root folder, run npm install, ensure you have mongodb installed and configured.
+Clone the repo, navigate to the root folder, run npm install.
 ## Usage
-Add to the budget on or offline.
+Filter and sort employees provided by the [Random User API](https://randomuser.me/).
 ## License
 This application is covered under the MIT license.
 ## Contributing

@@ -1,19 +1,14 @@
 import axios from "axios";
-// Set the number of results returned.
-const RESULTS_NUM = 500;
-// Localise the results so the formats look familiar.
-const NATIONALITY = "au";
-// Use a seed so the results are the same (then we can filter "our" employees)
-const USE_SEED = "jayarghargh";
-// Tie it together.
-const BASE_URL = `https://randomuser.me/api/?results=${RESULTS_NUM}&nat=${NATIONALITY}`;
+const BASE_URL = `https://randomuser.me/api/?`;
 
+// get and return employees from randomuser.
 export default {
-  search: function (seed = false) {
-    if (seed) {
-      return axios.get(BASE_URL + `&seed=${USE_SEED}`);
-    } else {
-      return axios.get(BASE_URL);
-    }
+  search: function (seed = false, numRes = 5, limitNationality = false) {
+    let apiUrl;
+    apiUrl = BASE_URL + `results=${numRes}`;
+    apiUrl = seed ? apiUrl + `&seed=${seed}` : apiUrl;
+    apiUrl = limitNationality ? apiUrl + `&nat=${limitNationality}` : apiUrl;
+
+    return axios.get(apiUrl);
   }
 };

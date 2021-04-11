@@ -5,12 +5,12 @@ import "./style.css";
 import Search from "../Search";
 
 function EmployeeTable(props) {
-  // const employees = props.employees;
   return (
     <table className={"table table-striped"}>
       <thead>
+      {/*create some headers for the sort arrows*/}
       <tr>
-        <th scope="col">Image</th>
+        <th scope="col"></th>
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"name"} subInd={"title"}/>
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"name"} subInd={"last"}/>
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"name"} subInd={"first"}/>
@@ -19,12 +19,11 @@ function EmployeeTable(props) {
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"location"} subInd={"country"}/>
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"location"} subInd={"postcode"}/>
         <ThWithSort handleSort={props.handleSort} thName={""} ind={"email"} subInd={false}/>
-        {/*<ThWithSort handleSort={props.handleSort} thName={"Mob"} ind={"cell"} subInd={false}/>*/}
       </tr>
+      {/*create some headers for the search / filter boxes.*/}
       <tr>
-        <th></th>
-        {/*<th><Search handleInputChange={props.handleInputChange} myFilter={"nameTitle"} placeHolder={"Title"} /></th>*/}
-        <th></th>
+        <th>Image</th>
+        <th>Gender</th>
         <th><Search handleInputChange={props.handleInputChange} myFilter={"NameLast"} placeHolder={"Last"} /></th>
         <th><Search handleInputChange={props.handleInputChange} myFilter={"nameFirst"} placeHolder={"First"} /></th>
         <th><Search handleInputChange={props.handleInputChange} myFilter={"dobAge"} placeHolder={"Age"} /></th>
@@ -32,13 +31,14 @@ function EmployeeTable(props) {
         <th><Search handleInputChange={props.handleInputChange} myFilter={"locationCountry"} placeHolder={"Country"} /></th>
         <th><Search handleInputChange={props.handleInputChange} myFilter={"LocationPostcode"} placeHolder={"Postcode"} /></th>
         <th><Search handleInputChange={props.handleInputChange} myFilter={"email"} placeHolder={"Email"} /></th>
-        {/*<th><Search handleInputChange={props.handleInputChange} myFilter={"cell"} placeHolder={"Mob"} /></th>*/}
       </tr>
       </thead>
       <tbody>
+      {/*list the employees, ensure a key is added.*/}
       {props.employees.map(employee => (
         <EmployeeRow employee={employee} key={employee.login.uuid} />
       ))}
+
       </tbody>
     </table>
   );

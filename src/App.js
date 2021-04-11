@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import Search from "./components/Search";
 import EmployeeTable from "./components/EmployeeTable";
 import API from "./API";
+import Container from "./components/Container";
+
+// some constants for the api search.
+const SEED = "jayarghargh";
+const NUM_RES = 500;
+const NATIONALITY = "au";
 
 class App extends Component {
   // Setting the state to the employees array.
@@ -26,6 +31,8 @@ class App extends Component {
         {filteredEmployees: this.state.employees.filter(
           item => {
             let filterSearch;
+            // Determine which filter to apply.
+            // TODO refactor this for readability.
             switch (event.target.name) {
               case "search-nameFirst":
                 filterSearch = item.name.first.toLowerCase().includes(this.state.search);
@@ -54,10 +61,9 @@ class App extends Component {
 
               default:
                 filterSearch = (
-                  // gotta search em all!
+                  // gotta catch em all!
                   item.name.first.toLowerCase().includes(this.state.search)
                   || item.name.last.toLowerCase().includes(this.state.search)
-                  || item.login.password.toLowerCase().includes(this.state.search)
                   || item.dob.age.toString().includes(this.state.search)
                   || item.location.city.toLowerCase().includes(this.state.search)
                   || item.location.country.toLowerCase().includes(this.state.search)
@@ -82,14 +88,15 @@ class App extends Component {
 
       // Allow for some nested elements.
       if (!subIndexToSort) {
-        itemA = a[indexToSort]; //.toLowerCase();
-        itemB = b[indexToSort]; //.toLowerCase();
+        itemA = a[indexToSort];
+        itemB = b[indexToSort];
       } else {
 
-        itemA = a[indexToSort][subIndexToSort] // .toLowerCase();
-        itemB = b[indexToSort][subIndexToSort] // .toLowerCase();
+        itemA = a[indexToSort][subIndexToSort];
+        itemB = b[indexToSort][subIndexToSort];
       }
 
+      // convert strings to lowercase for search matching.
       if (typeof itemA === "string") itemA = itemA.toLowerCase();
       if (typeof itemB === "string") itemB = itemB.toLowerCase();
 
@@ -111,8 +118,9 @@ class App extends Component {
     })});
   }
 
-  searchEmployees = (useSeed = true) => {
-    API.search(useSeed)
+  searchEmployees = () => {
+    // the search method.
+    API.search(SEED, NUM_RES, NATIONALITY)
       .then(res => this.setState({employees: res.data.results}))
       .then(() => this.setState({filteredEmployees: this.state.employees}))
       .catch(err => console.log(err));
@@ -120,23 +128,28 @@ class App extends Component {
 
   render() {
     return (
-      <Wrapper>
+      <Container>
         <Title>Employee Directory</Title>
+        {/*TODO add number results returned.*/}
+
+        {/*The search all*/}
         <div className={"row"}>
           <div className={"col-md-12"}>
             <Search handleInputChange={this.handleInputChange} myFilter={"everything"} placeHolder={"Dagnammit search everything!"}/>
           </div>
-
         </div>
 
-        <div className={"col-md-12"}>
-          <EmployeeTable
-            employees={this.state.filteredEmployees}
-            handleSort={this.handleSort}
-            handleInputChange={this.handleInputChange}
-          />
+        {/*The main layout.*/}
+        <div className={"row"}>
+          <div className={"col-md-12"}>
+            <EmployeeTable
+              employees={this.state.filteredEmployees}
+              handleSort={this.handleSort}
+              handleInputChange={this.handleInputChange}
+            />
+          </div>
         </div>
-      </Wrapper>
+      </Container>
     );
   }
 }
