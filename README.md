@@ -20,10 +20,18 @@ User can
 
 Currently the user cannot filter by more than one field at a time.
 
-* [View the deployed app on Heroku](https://floating-cliffs-70230.herokuapp.com/)
-* [View it on GitHub](https://github.com/FSC-Portfolio/pwa-budget-tracker)
+* [View the deployed app on GitHub](https://fsc-portfolio.github.io/emplectory/)
+* [View the code on GitHub](https://github.com/FSC-Portfolio/emplectory)
 
-![screenshot](./public/screencast.gif)
+<figure class="video_container">
+  <video controls="true" allowfullscreen="true" poster="./public/screenshot.png">
+    <source src="./public/screencast.mp4" type="video/mp4">
+  </video>
+</figure>
+
+[comment]: <> (![screenshot]&#40;./public/screenshot.png&#41;)
+
+[comment]: <> (![screenshot]&#40;./public/screencast_l.gif&#41;)
 
 ## Installation
 Clone the repo, navigate to the root folder, run npm install.
