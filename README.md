@@ -1,5 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Employee Directory
+![screenshot](./public/screencast.gif)
 ## Table of Contents
 > - [Description](#Description)
 > - [Table of Contents](#Table-of-Contents)
@@ -23,20 +24,16 @@ Currently the user cannot filter by more than one field at a time.
 * [View the deployed app on GitHub](https://fsc-portfolio.github.io/emplectory/)
 * [View the code on GitHub](https://github.com/FSC-Portfolio/emplectory)
 
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="./public/screenshot.png">
-    <source src="./public/screencast.mp4" type="video/mp4">
-  </video>
-</figure>
-
-[comment]: <> (![screenshot]&#40;./public/screenshot.png&#41;)
-
-[comment]: <> (![screenshot]&#40;./public/screencast_l.gif&#41;)
-
 ## Installation
-Clone the repo, navigate to the root folder, run npm install.
+Clone the repo, navigate to the root folder, run `npm install`.
 ## Usage
-Filter and sort employees provided by the [Random User API](https://randomuser.me/).
+`npm start` https://localhost:3000 will open where you can filter and sort employees provided by the [Random User API](https://randomuser.me/).
+To change the results returned, change the following in app.js
+
+- `const SEED =  String or null` the name of the Random User seed.
+- `const NUM_USERS = Number or null` the maximum number of results you'd like - Random User have their own limits you need to be aware of.
+- `const NATIONALITY = String or null` limit the results to a specific national location (country code eg au).
+
 ## License
 This application is covered under the MIT license.
 ## Contributing
